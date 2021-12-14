@@ -29,3 +29,10 @@ qSample <- quantile(x)
 q1 <- qSample["25%"]
 q3 <- qSample["75%"]
 iqr <- q3 - q1
+condQ1 <- q1 - 1.5 * iqr
+condQ3 <- q3 + 1.5 * iqr
+outlierBool <- (x > condQ3) | (x < condQ1)
+Data <- x[outlierBool]
+Index <- which(outlierBool)
+outlier <- data.frame(index = Index, data = Data)
+outlier
