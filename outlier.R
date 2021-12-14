@@ -19,8 +19,13 @@ x <-
     63,
     61,
     64,
+    20,
     89,
     90,
     5,
     10)
 quantile(x)
+qSample <- quantile(x)
+q1 <- qSample["25%"]
+q3 <- qSample["75%"]
+iqr <- q3 - q1
