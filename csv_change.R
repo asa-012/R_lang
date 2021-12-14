@@ -12,12 +12,27 @@ sumScore
 avgScore <- c(sum / 5)
 avgScore
 #順位を求める　合計点から 点数の大きい順にソート
-rank1 <- rank(sumScore,ties.method = "min")
+rank1 <- rank(sumScore, ties.method = "min")
 rank1
-rank2 <- c(51-rank1)
+rank2 <- c(51 - rank1)
 rank2
 #偏差値=(点数-平均点)*10/標準偏差+50
-avgallPeople <-c(sum(sumScore)/50)
-avgallPeople
+sumAllSubject <- sum(sumScore)
+sumAllSubject
+
+avgAllPeople <- c(sumAllSubject / 50)
+avgAllPeople
+
+#標準偏差
+sd <- c(sumScore - avgAllPeople)
+sd <- sd^2
+sd <-sum(sd)
+sd <- c(sd/50)
+sd <- c(sqrt(sd))
+sd
+
+#偏差値=(点数-平均点)*10/標準偏差+50
+
+
 
 # A>65,55<=B<65,55<=C<45,45<=D<35,35>E
