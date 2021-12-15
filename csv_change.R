@@ -38,7 +38,7 @@ devValue <- c(devValue / sd)
 devValue <- c(devValue + 50)
 
 rdf$sum <- sumScore
-rdf$avg<- avgAllPeople
+rdf$avg <- avgAllPeople
 rdf$rank <- rank
 rdf$devValue <- devValue
 
@@ -57,6 +57,4 @@ rdf$judge <- judge
 
 rdf
 
-
-
-
+write.csv(rdf, "result_seiseki", quote = F)
