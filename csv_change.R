@@ -14,7 +14,7 @@ avgScore
 #順位を求める　合計点から 点数の大きい順にソート
 rank <- rank(sumScore, ties.method = "min")
 rank
-rank <- c(51 - rank1)
+rank <- c(51 - rank)
 rank
 #偏差値=(点数-平均点)*10/標準偏差+50
 sumAllSubject <- sum(sumScore)
@@ -32,7 +32,7 @@ sd <- c(sqrt(sd))
 sd
 
 #偏差値=(点数-平均点)*10/標準偏差+50
-devValue <- c(sum - avgAllPeople)
+devValue <- c(sumScore - avgAllPeople)
 devValue <- c(devValue * 10)
 devValue <- c(devValue / sd)
 devValue <- c(devValue + 50)
