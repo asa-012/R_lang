@@ -9,7 +9,7 @@ chemistry <- rdf[, "化学"]
 sumScore <- c(japanese + english + math + physics + chemistry)
 sumScore
 #１人１人の平均点
-avgScore <- c(sum / 5)
+avgScore <- c(sumScore / 5)
 avgScore
 #順位を求める　合計点から 点数の大きい順にソート
 rank <- rank(sumScore, ties.method = "min")
@@ -58,3 +58,4 @@ rdf$judge <- judge
 rdf
 
 write.csv(rdf, "result_seiseki", quote = F)
+
