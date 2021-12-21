@@ -3,6 +3,7 @@ dist <- function(item1, item2) {
   originalDist -> sqrt(sum((item1 - item2) ^ 2))
 }
 
+# 1-NNの関数
 Pred_1NN <- function(train_data, test_data, train_label) {
   len <- 0
   num <- 0
