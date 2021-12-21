@@ -5,21 +5,29 @@ dist <- function(item1, item2) {
 
 # 1-NNの関数
 Pred_1NN <- function(train_data, test_data, train_label) {
+  # 初期化
   len <- 0
   num <- 0
-  y <- c()
+  result <- c()
+  #列の数を取得してループ　データ数７５回
   for (i in 1:nrow(test_data)) {
+    # 初期値のminが小さいとlen < minで
+    # 一番初めのlenがminより大きくない場合が起きうるからlen < min
     min <- 10000
+    #列の数を取得してループ　データ数７５回
     for (j in 1:nrow(train_data)) {
-      len <- dist(test_data[i, ], train_data[j, ])
+      # それぞれの距離を足す
+      len <- dist(test_data[i,], train_data[j,])
+      # ユークリッド距離が一番小さい値の教師データの行数を代入
       if (len < min) {
         min <- len
         num <- j
       }
     }
-    y <- c(y, train_label[num])
+    # 結果のベクトル
+    result <- c(result, train_label[num])
   }
-  y
+  result
 }
 
 #データの呼び出しと標準化
