@@ -18,7 +18,13 @@ Pred_1NN <- function(train_data, test_data, train_label) {
       }
     }
     y <- c(y, train_label[num])
-    
   }
   y
 }
+
+#データの呼び出しと標準化
+data(iris)
+niris <- iris
+niris[, 1:4] <- scale(niris[, 1:4])
+niris$Species <- as.character(niris$Species)
+niris$id <- 1:nrow(niris)
