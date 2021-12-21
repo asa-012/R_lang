@@ -11,7 +11,7 @@ Pred_1NN <- function(train_data, test_data, train_label) {
   for (i in 1:nrow(test_data)) {
     min <- 10000
     for (j in 1:nrow(train_data)) {
-      len <- dist(test_data[i,], train_data[j,])
+      len <- dist(test_data[i, ], train_data[j, ])
       if (len < min) {
         min <- len
         num <- j
@@ -41,3 +41,16 @@ pred_label_1 <-
   Pred_1NN(train_data_1, test_data_1, train_label_1)
 error_rate_1 <-
   sum(pred_label_1 != test_label_1) / 75.0
+#前半をテスト，後半を教師
+train_data_2 <-
+  niris[c(1:25, 51:75, 101:125), 1:4] # 教師データセット
+test_data_2 <-
+  niris[c(1:25, 51:75, 101:125), 1:4] # テストデータセット
+train_label_2 <-
+  niris[c(1:25, 51:75, 101:125), 5] # 教師データの分類ラベル
+test_label_2 <-
+  niris[c(1:25, 51:75, 101:125), 5] # テストデータの正解ラベル
+pred_label_2 <-
+  Pred_1NN(train_data_2, test_data_2, train_label_2)
+error_rate_2 <-
+  sum(pred_label_2 != test_label_2) / 75.0
