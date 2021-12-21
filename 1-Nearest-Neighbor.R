@@ -54,3 +54,6 @@ pred_label_2 <-
   Pred_1NN(train_data_2, test_data_2, train_label_2)
 error_rate_2 <-
   sum(pred_label_2 != test_label_2) / 75.0
+#誤分類率の平均を求める
+avg <- (error_rate_1 + error_rate_2) / 2.0
+cat("error rate=", avg, "n")
