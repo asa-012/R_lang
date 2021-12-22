@@ -63,6 +63,6 @@ niris_1 <- c()
 niris_2 <- c()
 #誤分類だったデータの番号を求める
 niris_1 <- niris[-c(1:25, 51:75, 101:125),]
-niris_2 <- niris[-c(1:25, 51:75, 101:125),]
+niris_2 <- niris[c(1:25, 51:75, 101:125),]
 niris_1 [pred_label_1 != test_label_1, 6]
 niris_2 [pred_label_2 != test_label_2, 6]
