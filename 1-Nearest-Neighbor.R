@@ -56,3 +56,13 @@ error_rate_2 <- sum(pred_label_2 != test_label_2) / 75.0
 #誤分類率の平均を求める
 avg <- (error_rate_1 + error_rate_2) / 2.0
 cat("error rate=", avg, "\n")
+
+#誤分類のデータを求める
+# 初期化
+niris_1 <- c()
+niris_2 <- c()
+#誤分類だったデータの番号を求める
+niris_1 <- niris[-c(1:25, 51:75, 101:125),]
+niris_2 <- niris[-c(1:25, 51:75, 101:125),]
+niris_1 [pred_label_1 != test_label_1, 6]
+niris_2 [pred_label_2 != test_label_2, 6]
