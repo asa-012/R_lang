@@ -15,3 +15,7 @@ wordfreq <- function(filename, k) {
 }
 talice <- wordfreq("alice.txt", 20)
 tbohemia <- wordfreq("bohemia.txt", 20)
+
+#出力
+talice
+tbohemia
