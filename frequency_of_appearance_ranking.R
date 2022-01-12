@@ -19,3 +19,10 @@ tbohemia <- wordfreq("bohemia.txt", 20)
 #出力
 talice
 tbohemia
+
+#調査
+#wakati192<-wordfreq("192_wakati.txt",1000) 
+#wakati187<-wordfreq("187_wakati.txt",1000) 
+#wakati185<-wordfreq("185_wakati.txt",1000) 
+#wakati183<-wordfreq("183_wakati.txt",1000) 
+
