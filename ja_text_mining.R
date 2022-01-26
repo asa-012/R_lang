@@ -5,6 +5,12 @@ bojDF0 <- docMatrix("boj", pos = c(" 名詞 "), weight = "tf*idf*norm")
 bojDF1 <- makeRNDF(bojDF0)
 
 #Q1: 株価の表をもとに要素数９の株価ベクトルを作成するプログラム
+AVG<-c(17225,17287,18138,16785,15307,12525,13481,11259,8859)
+len=nrow(bojDF1)
+res <- c()
+for(x in 1:len){
+  res <- c(res,cor(bojDF1[x,],AVG))
+}
 
 #Q2:　Q0で作ったターム・文書行列は各タームにつき9つの頻度を持つ.
 #各タームごとの 9 つの 要素を一つのベクトルとみなし，
