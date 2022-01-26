@@ -47,6 +47,16 @@ freqNoun <-
 #r個の頻出単語を求めるとN×r個の単語が見つかる.
 #それに対し、重複を除いた単語をベクトルで返す関数
 #highFreqNoun(DF,r)の作成.
+highFreqNoun <- function(DF, X) {
+  terms <- c()
+  for (i in 1:ncol(DF)) {
+    terms <- c(terms, freqNoun(DF, i, X))
+    cat(freqNoun(DF, i, X), "¥n")
+  }
+  uterms <- unique(terms)
+  return(uterms)
+}
+
 
 
 #2-Q3: Q2で作成した関数highFreqNoun()に入力データフレームとして
