@@ -27,5 +27,8 @@ res1 <- data.frame("term" = rownames(bojDF1), "SOUKAN" = res)
 res2 <- rev(order(res))
 res3 <- res1[res2,]
 
-ームをもとに相関係数が最も高いターム
-#とその相関係数，最も小さいタームを表示する
+
+#Q5: Q4のデータフレームをもとに相関係数が最も高いターム
+#とその相関係数，最も小さいタームを表示
+
+
