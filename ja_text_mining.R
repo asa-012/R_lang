@@ -57,14 +57,24 @@ highFreqNoun <- function(DF, X) {
   return(uterms)
 }
 
-
-
 #2-Q3: Q2で作成した関数highFreqNoun()に入力データフレームとして
 #Q0で作成したデータフレームを、頻出語の数として
 #５を与えた時の出力単語を求める.
 
 #2-Q4: 課題１のQ4のデータフレームの対し、
 #課題2のQ3で得られた頻出語だけを残すプログラムを作成.
+bojDF0 <-docMatrix("boj",pos= c("名詞"), weight = "tf*idf*norm")
+bojDF1 <-makeRNDF(bojDF0)
+AVG<-c(17225,17287,18138,16785,15307,12525,13481,11259,8859)
+len=nrow(bojDF1)
+res <- c()
+for(x in 1:len){
+  res <- c(res,cor(bojDF1[x,],AVG))
+}
+res1 <- data.frame("term"=rownames(bojDF1),"SOUKAN"=res)
+res2 <- rev(order(res))
+res3 <- res1[res2,]
+
 
 #2-Q5: 頻出語を相関係数でグループ分けし表示するプログラムを作成.
 # グループ１：相関係数が+0.5以上
