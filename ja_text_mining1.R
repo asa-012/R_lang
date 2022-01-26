@@ -10,9 +10,9 @@ AVG <-
 #1-Q2:　Q0で作ったターム・文書行列は各タームにつき9つの頻度を持つ.
 #各タームごとの 9 つの 要素を一つのベクトルとみなし，
 #Q1で作った株価ベクトルとの相関係数を求めるプログラム（相関係数はベクトル）
-len = nrow(bojDF1)
+bojDF1Length = nrow(bojDF1)
 res <- c()
-for (x in 1:len) {
+for (x in 1:bojDF1Length) {
   res <- c(res, cor(bojDF1[x,], AVG))
 }
 
@@ -27,5 +27,5 @@ res3 <- res1[res2,]
 
 #1-Q5: Q4のデータフレームをもとに相関係数が最も高いターム
 #とその相関係数，最も小さいタームを表示
-#print(res3[1,])
-#(res3[len,])
+print(res3[1,])
+(res3[bojDF1Length,])
