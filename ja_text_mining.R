@@ -32,6 +32,9 @@ print(res3[len,])
 
 #2-Q0: docMatrix()関数で”boj”フォルダからターム・文書行列を作成
 #品詞は名詞のみ 重みは“ tf”
+bojDF02 <- docMatrix("boj",pos=c("名詞"),weight="tf")
+bojDF2 <- makeRNDF(bojDF02)
+
 
 #2-Q1: データフレームDFのK番目の列を頻度で並び替えその頻度順で
 #上位ｒ個の頻出単語をベクトルで返す関数freqNoun(DF,K,r)を作成
