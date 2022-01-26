@@ -1,6 +1,5 @@
 #Q0 docMatrix 関数で boj フォルダからターム・文書行列を作成 名詞のみ　重みは“ tf idf *norm
 
-
 bojDF0 <- docMatrix("boj", pos = c(" 名詞 "), weight = "tf*idf*norm")
 bojDF1 <- makeRNDF(bojDF0)
 
@@ -20,7 +19,6 @@ for (x in 1:len) {
 #Q3:　Q2で求めた各タームに対する相関係数ベクトルから，
 #タームと相関係数からなるデータフレームを作成するプログラム
 res1 <- data.frame("term" = rownames(bojDF1), "SOUKAN" = res)
-
 
 #Q4: Q3で作成したタームと相関係数のデータフレームに対し，
 #相関係数の降順(大きい順)に 並び変える
