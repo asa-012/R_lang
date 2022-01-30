@@ -47,7 +47,7 @@ P2 <- P1[-h,-h]
 for (i in 1:ncol(P2)) {
   for (j in 1:nrow(P2)) {
     if (P2[i, j] != 0) {
-      P2[i, j] <-1
+      P2[i, j] <- 1
     }
   }
 }
@@ -65,3 +65,21 @@ for (i in 1:nrow(P2)) {
 }
 
 # PageRank計算
+alfa <-0.85
+n <-nrow(P2)
+ip <-0.0001
+u <-matrix(1 / n, nrow = n, ncol = 1)
+u0 <-matrix(1 / n, nrow = n, ncol = 1)
+while (TRUE) {
+  u1 <- alfa * P2 %*% u0 + (1 - alfa) * u
+  if (norm(u1 - u0) < ip) {
+    break
+  }
+  u0 <- u1
+}
+PR1 <- u1
+#降順にする
+term1 <-rownames(PR1)
+term2 <-term1[order(PR1, decreasing = TRUE)]
+PR2 <-PR1[order(PR1, decreasing = TRUE)]
+PR3 <- data.frame(term2, PR2)
