@@ -8,9 +8,11 @@ sarukaniDF <-
 a <- sarukaniDF[order(sarukaniDF[, 4], decreasing = TRUE),]
 # f以上のもののみを抽出しbに代入
 b <- a[a$"sarukani_gassen-utf8.txt" >= f,]
+# 非自立、接尾、特殊、代名詞を除く
 c <-
   b[(b$POS2 != "非自立") &
       (b$POS2 != "接尾") & (b$POS2 != "特殊") & (b$POS2 != "代名詞"),]
+#TERM列を抽出
 termRow <- c$TERM
 resultExtractionTable <-
   matrix(0, nrow = length(termRow), ncol = length(termRow))
@@ -23,63 +25,66 @@ for (i in 1:length(termRow)) {
   row <- length(rownames(co_occurrence_frequency))
   for (j in 1:length(termRow)) {
     for (k in 1:(row - 2)) {
+      # i,jの後だからrow-2している
       if (termRow[j] == co_occurrence_frequency$Term[k]) {
         resultExtractionTable[i, j] <- co_occurrence_frequency$Span[k] break
       }
     }
   }
+  # 表の斜めを０にする
+  resultExtractionTable[i, i] <- 0
 }
-# 表の斜めを０にする
-for (i in 1:length(termRow)) {
-  P1[i, i] <- 0
-}
-colnames(P1) <- c(termRow)
-rownames(P1) <- c(termRow)
-# 表の正規化
+colnames(resultExtractionTable) <- c(termRow)
+rownames(resultExtractionTable) <- c(termRow)
+# 頻度行列の正規化(Step1)
 h <- 0
 for (i in 1:length(termRow)) {
-  if (sum(P1[, i]) == 0) {
+  if (sum(resultExtractionTable[, i]) == 0) {
     h <- i
   }
 }
-P2 <- P1[-h,-h]
-# 確率行列化
-for (i in 1:ncol(P2)) {
-  for (j in 1:nrow(P2)) {
-    if (P2[i, j] != 0) {
-      P2[i, j] <- 1
+# 頻度行列の正規化(Step2)
+newResultExtractionTable <- resultExtractionTable[-h,-h]
+# 確率行列化(Step1)
+for (i in 1:ncol(newResultExtractionTable)) {
+  for (j in 1:nrow(newResultExtractionTable)) {
+    if (newResultExtractionTable[i, j] != 0) {
+      newResultExtractionTable[i, j] <- 1
     }
   }
 }
+# 確率行列化(Step2)
 sumcol <- c()
 #各列の列和をsumcolに保存
-for (i in 1:ncol(P2)) {
-  sumcol <- c(sumcol, sum(P2[, i]))
+for (i in 1:ncol(newResultExtractionTable)) {
+  sumcol <- c(sumcol, sum(newResultExtractionTable[, i]))
 }
-for (i in 1:nrow(P2)) {
-  for (j in 1:ncol(P2)) {
-    if (P2[i, j] != 0) {
-      P2[i, j] <- P2[i, j] / sumcol[j]
+for (i in 1:nrow(newResultExtractionTable)) {
+  for (j in 1:ncol(newResultExtractionTable)) {
+    if (newResultExtractionTable[i, j] != 0) {
+      newResultExtractionTable[i, j] <-
+        newResultExtractionTable[i, j] / sumcol[j]
     }
   }
 }
 
 # PageRank計算
-alfa <-0.85
-n <-nrow(P2)
-ip <-0.0001
-u <-matrix(1 / n, nrow = n, ncol = 1)
-u0 <-matrix(1 / n, nrow = n, ncol = 1)
+alfa <- 0.85
+n <- nrow(newResultExtractionTable)
+ip <- 10^-4
+u <- matrix(1 / n, nrow = n, ncol = 1)
+u0 <- matrix(1 / n, nrow = n, ncol = 1)
 while (TRUE) {
-  u1 <- alfa * P2 %*% u0 + (1 - alfa) * u
+  u1 <- alfa * newResultExtractionTable %*% u0 + (1 - alfa) * u
   if (norm(u1 - u0) < ip) {
     break
   }
   u0 <- u1
 }
-PR1 <- u1
+PageRank <- u1
 #降順にする
-term1 <-rownames(PR1)
-term2 <-term1[order(PR1, decreasing = TRUE)]
-PR2 <-PR1[order(PR1, decreasing = TRUE)]
-PR3 <- data.frame(term2, PR2)
+term1 <- rownames(PageRank)
+term2 <- term1[order(PageRank, decreasing = TRUE)]
+PageRank <- PageRank[order(PageRank, decreasing = TRUE)]
+PageRank <- data.frame(term2, PageRank)
+PageRank
