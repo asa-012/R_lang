@@ -71,7 +71,7 @@ for (i in 1:nrow(newResultExtractionTable)) {
 # PageRank計算
 alfa <- 0.85
 n <- nrow(newResultExtractionTable)
-ip <- 10^-4
+ip <- 10 ^ -4
 u <- matrix(1 / n, nrow = n, ncol = 1)
 u0 <- matrix(1 / n, nrow = n, ncol = 1)
 while (TRUE) {
@@ -82,9 +82,9 @@ while (TRUE) {
   u0 <- u1
 }
 PageRank <- u1
-#降順にする
-term1 <- rownames(PageRank)
-term2 <- term1[order(PageRank, decreasing = TRUE)]
-PageRank <- PageRank[order(PageRank, decreasing = TRUE)]
-PageRank <- data.frame(term2, PageRank)
-PageRank
+#順序変更　降順
+pageRankRow <- rownames(PageRank)
+pageRankRow <- term[order(PageRank, decreasing = TRUE)]
+pageRankResult <- PageRank[order(pageRankResult, decreasing = TRUE)]
+pageRankResult <- data.frame(PageRankRow, pageRankResult)
+pageRankResult
