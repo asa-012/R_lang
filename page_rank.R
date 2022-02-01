@@ -1,4 +1,4 @@
-# 内容語の抽出
+# 1.内容語の抽出
 f <- 5
 sarukaniDF <-
   docDF("sarukani_gassen-utf8.txt",
@@ -16,7 +16,7 @@ c <-
 termRow <- c$TERM
 resultExtractionTable <-
   matrix(0, nrow = length(termRow), ncol = length(termRow))
-# 共起頻度の作成 collocateのspan=3と最小頻度f=5とする
+# 2.共起頻度の作成 collocateのspan=3と最小頻度f=5とする
 for (i in 1:length(termRow)) {
   co_occurrence_frequency <-
     collocate("sarukani_gassen-utf8.txt",
@@ -36,7 +36,7 @@ for (i in 1:length(termRow)) {
 }
 colnames(resultExtractionTable) <- c(termRow)
 rownames(resultExtractionTable) <- c(termRow)
-# 頻度行列の正規化(Step1)
+# 3.頻度行列の正規化(Step1)
 h <- 0
 for (i in 1:length(termRow)) {
   if (sum(resultExtractionTable[, i]) == 0) {
@@ -53,7 +53,7 @@ for (i in 1:ncol(newResultExtractionTable)) {
     }
   }
 }
-# 確率行列化(Step2)
+# 4.確率行列化(Step2)
 sumcol <- c()
 #各列の列和をsumcolに保存
 for (i in 1:ncol(newResultExtractionTable)) {
@@ -68,7 +68,7 @@ for (i in 1:nrow(newResultExtractionTable)) {
   }
 }
 
-# PageRank計算
+# 5.PageRank計算
 alfa <- 0.85
 n <- nrow(newResultExtractionTable)
 ip <- 10 ^ -4
