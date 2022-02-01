@@ -9,11 +9,11 @@ a <- sarukaniDF[order(sarukaniDF[, 4], decreasing = TRUE),]
 # f以上のもののみを抽出しbに代入
 b <- a[a$"sarukani_gassen-utf8.txt" >= f,]
 # 非自立、接尾、特殊、代名詞を除く
-c <-
+termList <-
   b[(b$POS2 != "非自立") &
       (b$POS2 != "接尾") & (b$POS2 != "特殊") & (b$POS2 != "代名詞"),]
 #TERM列を抽出
-termRow <- c$TERM
+termRow <- termList$TERM
 resultExtractionTable <-
   matrix(0, nrow = length(termRow), ncol = length(termRow))
 # 2.共起頻度の作成 collocateのspan=3と最小頻度f=5とする
@@ -27,7 +27,8 @@ for (i in 1:length(termRow)) {
     for (k in 1:(row - 2)) {
       # i,jの後だからrow-2している
       if (termRow[j] == co_occurrence_frequency$Term[k]) {
-        resultExtractionTable[i, j] <- co_occurrence_frequency$Span[k] break
+        resultExtractionTable[i, j] <- co_occurrence_frequency$Span[k]
+        break
       }
     }
   }
@@ -81,10 +82,12 @@ while (TRUE) {
   }
   u0 <- u1
 }
-PageRank <- u1
+PageRank1 <- u1
 #順序変更　降順
-pageRankRow <- rownames(PageRank)
-pageRankRow <- term[order(PageRank, decreasing = TRUE)]
-pageRankResult <- PageRank[order(pageRankResult, decreasing = TRUE)]
-pageRankResult <- data.frame(PageRankRow, pageRankResult)
+pageRankRow <- rownames(PageRank1)
+term <- pageRankRow[order(PageRank1, decreasing = TRUE)]
+
+pageRankResult <- PageRank1[order(PageRank1, decreasing = TRUE)]
+pageRankResult <- data.frame(term, pageRankResult)
 pageRankResult
+
