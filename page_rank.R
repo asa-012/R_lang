@@ -89,4 +89,7 @@ term <- pageRankRow[order(PageRank1, decreasing = TRUE)]
 
 pageRankResult <- PageRank1[order(PageRank1, decreasing = TRUE)]
 pageRankResult <- data.frame(term, pageRankResult)
+
+termList
 pageRankResult
+
