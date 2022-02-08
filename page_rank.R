@@ -90,6 +90,8 @@ term <- pageRankRow[order(PageRank1, decreasing = TRUE)]
 pageRankResult <- PageRank1[order(PageRank1, decreasing = TRUE)]
 pageRankResult <- data.frame(term, pageRankResult)
 
+# 内容語の抽出
 termList
+# 抽出した内容語のPageRank
 pageRankResult
 
