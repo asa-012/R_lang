@@ -95,9 +95,7 @@ termList
 # 抽出した内容語のPageRank
 pageRankResult
 
+# Personalized PageRankを用いた特定の内容語に関するランキング(猿、蟹)
 word<-rownames(P2)
 alfa<-0.85
 n<-c(0,0,0,0,0,0,0,0,0,0)
-
-
-
