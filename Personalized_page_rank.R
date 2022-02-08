@@ -96,6 +96,22 @@ termList
 pageRankResult
 
 # Personalized PageRankを用いた特定の内容語に関するランキング(猿、蟹)
-word<-rownames(P2)
-alfa<-0.85
-n<-c(0,0,0,0,0,0,0,0,0,0)
+word <- rownames(newResultExtractionTable)
+alfa <- 0.85
+n <- c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+# n <-c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+
+#蟹のとき
+n[which(word == "蟹")] <- 1
+ip <- 0.0001
+u <- n
+u0 <- n
+while (TRUE) {
+  u1 <- alfa * newResultExtractionTable %*% u0 + (1 - alfa) * u
+  if (norm(u1 - u0) < ip) {
+    break
+  }
+  u0 <- u1
+}
+PPR1 <- u1
+print(PPR1) 
