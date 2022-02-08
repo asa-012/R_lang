@@ -96,6 +96,7 @@ termList
 pageRankResult
 
 # Personalized PageRankを用いた特定の内容語に関するランキング(猿、蟹)
+
 #蟹のとき
 word <- rownames(newResultExtractionTable)
 alfa <- 0.85
@@ -113,7 +114,12 @@ while (TRUE) {
   u0 <- u1
 }
 personalizedPageRank <- u1
-print(personalizedPageRank)
+#降順にする
+term<-rownames(personalizedPageRank)
+term<-term[order(personalizedPageRank,decreasing=TRUE)]
+midPersonalizedPageRank<-personalizedPageRank[order(personalizedPageRank,decreasing=TRUE)]
+resultPersonalizedPageRank<-data.frame(term,midPersonalizedPageRank)
+resultPersonalizedPageRank
 
 #猿のとき
 word <- rownames(newResultExtractionTable)
@@ -132,4 +138,10 @@ while (TRUE) {
   u0 <- u1
 }
 personalizedPageRank <- u1
-print(personalizedPageRank)
+#降順にする
+term<-rownames(personalizedPageRank)
+term<-term[order(personalizedPageRank,decreasing=TRUE)]
+midPersonalizedPageRank<-personalizedPageRank[order(personalizedPageRank,decreasing=TRUE)]
+resultPersonalizedPageRank<-data.frame(term,midPersonalizedPageRank)
+resultPersonalizedPageRank
+
